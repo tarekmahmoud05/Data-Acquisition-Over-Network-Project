@@ -37,7 +37,7 @@ void UartInit(void) // Function to initialize UART communication
 
 void UartSetBaudRate(unsigned short BuadRate) // Function to set UART baud rate dynamically
 {
-    unsigned short UBBR = ( (F_CPU / 16) /  BuadRate ) - 1;/ / Calculate baud rate register value
+    unsigned short UBBR = ( (F_CPU / 16) /  BuadRate ) - 1; // Calculate baud rate register value
     UBRR0L = (UBBR & 0xFF); // Load lower 8 bits of UBRR value
     UBRR0H = (( UBBR >> 8 ) & 0xFF); // Load higher 8 bits of UBRR value
 }
