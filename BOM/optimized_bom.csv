@@ -1,0 +1,8 @@
+Part,Description,Quantity,Price (EGP),Total Price (EGP),Datasheet
+AVR Controller,ATmega328P,1,225,340,https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+Power Supply ,Battery,1,50,,
+LED,"Red LED, 5mm",1,5,,
+Resistor,"220 Ohm, 0.25W",1,5,,
+push button,responds to pysical press and release,1,5,,
+Capacitors,for better debouncing,1,40,,
+PCB,connecting electronic components,1,10,,

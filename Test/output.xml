@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.11.5 on win32)" generated="2025-10-19T15:08:58.285272" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="D:\Coventry University\Year 2\1st semester\Embedded Systems\CW1\Test\test.robot">
+<kw name="Initialize Port" type="SETUP">
+<kw name="Add Port" owner="SerialLibrary">
+<arg>${PORT}</arg>
+<arg>baudrate=${BAUDRATE}</arg>
+<arg>encoding=ascii</arg>
+<doc>Adds new port with specified locator.</doc>
+<status status="PASS" start="2025-10-19T15:08:58.402699" elapsed="0.000000"/>
+</kw>
+<kw name="Open Port" owner="SerialLibrary">
+<doc>Opens specified port.</doc>
+<status status="PASS" start="2025-10-19T15:08:58.402699" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:08:58.402699" level="INFO">Opened port COM8 at 9600.</msg>
+<arg>Opened port ${PORT} at ${BAUDRATE}.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:08:58.402699" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:01.403036" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:08:58.402699" elapsed="3.000337"/>
+</kw>
+<doc>Adds the port configuration and opens the connection once per test suite.</doc>
+<status status="PASS" start="2025-10-19T15:08:58.402699" elapsed="3.000847"/>
+</kw>
+<test id="s1-t1" name="Verify Led On Command" line="85">
+<kw name="Run Serial Command">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-19T15:09:01.403546" level="INFO">${full_command} = led_onx</msg>
+<var>${full_command}</var>
+<arg>${command_base}${TERMINATOR}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:01.403546" level="INFO">${command_bytes} = led_onx</msg>
+<var>${command_bytes}</var>
+<arg>'${full_command}'.encode('ascii')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="0.000000"/>
+</kw>
+<kw name="Write Data" owner="SerialLibrary">
+<arg>${command_bytes}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:01.403546" level="INFO">Sent Command: led_onx</msg>
+<arg>Sent Command: ${full_command}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.403887" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="1.000341"/>
+</kw>
+<kw name="Read All Data" owner="SerialLibrary">
+<msg time="2025-10-19T15:09:02.405891" level="INFO">${response_bytes} = 6C 65 64 5F 6F 6E 0A</msg>
+<var>${response_bytes}</var>
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.403887" elapsed="0.002004"/>
+</kw>
+<kw name="Decode Serial Response">
+<kw name="Replace String" owner="String">
+<msg time="2025-10-19T15:09:02.405891" level="INFO">${hex_string_clean} = 6C65645F6F6E0A</msg>
+<var>${hex_string_clean}</var>
+<arg>${response_bytes}</arg>
+<arg>${SPACE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.405891" level="INFO">${decoded_response} = led_on</msg>
+<var>${decoded_response}</var>
+<arg>bytes.fromhex('${hex_string_clean}').decode('ascii').strip()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${decoded_response}</value>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-19T15:09:02.405891" level="INFO">${decoded_response} = led_on</msg>
+<var>${decoded_response}</var>
+<arg>${response_bytes}</arg>
+<doc>Decodes the raw hex string response from the library into a readable string.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.405891" level="INFO">Received Response: led_on</msg>
+<arg>Received Response: ${decoded_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${decoded_response}</arg>
+<arg>${expected_response}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.405891" elapsed="0.000000"/>
+</kw>
+<arg>led_on</arg>
+<arg>led_on</arg>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="1.002345"/>
+</kw>
+<doc>Sends 'led_onx' and expects 'led_on' response.</doc>
+<status status="PASS" start="2025-10-19T15:09:01.403546" elapsed="1.002345"/>
+</test>
+<test id="s1-t2" name="Verify Led Off Command" line="89">
+<kw name="Run Serial Command">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.414290" level="INFO">${full_command} = led_offx</msg>
+<var>${full_command}</var>
+<arg>${command_base}${TERMINATOR}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.414290" level="INFO">${command_bytes} = led_offx</msg>
+<var>${command_bytes}</var>
+<arg>'${full_command}'.encode('ascii')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="0.000000"/>
+</kw>
+<kw name="Write Data" owner="SerialLibrary">
+<arg>${command_bytes}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:02.414290" level="INFO">Sent Command: led_offx</msg>
+<arg>Sent Command: ${full_command}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.414673" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="1.000383"/>
+</kw>
+<kw name="Read All Data" owner="SerialLibrary">
+<msg time="2025-10-19T15:09:03.414673" level="INFO">${response_bytes} = 6C 65 64 5F 6F 66 66 0A</msg>
+<var>${response_bytes}</var>
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.414673" elapsed="0.000000"/>
+</kw>
+<kw name="Decode Serial Response">
+<kw name="Replace String" owner="String">
+<msg time="2025-10-19T15:09:03.414673" level="INFO">${hex_string_clean} = 6C65645F6F66660A</msg>
+<var>${hex_string_clean}</var>
+<arg>${response_bytes}</arg>
+<arg>${SPACE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.414673" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.414673" level="INFO">${decoded_response} = led_off</msg>
+<var>${decoded_response}</var>
+<arg>bytes.fromhex('${hex_string_clean}').decode('ascii').strip()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.414673" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${decoded_response}</value>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-19T15:09:03.419183" level="INFO">${decoded_response} = led_off</msg>
+<var>${decoded_response}</var>
+<arg>${response_bytes}</arg>
+<doc>Decodes the raw hex string response from the library into a readable string.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.414673" elapsed="0.004510"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.419183" level="INFO">Received Response: led_off</msg>
+<arg>Received Response: ${decoded_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${decoded_response}</arg>
+<arg>${expected_response}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<arg>led_off</arg>
+<arg>led_off</arg>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="1.004893"/>
+</kw>
+<doc>Sends 'led_offx' and expects 'led_off' response.</doc>
+<status status="PASS" start="2025-10-19T15:09:02.414290" elapsed="1.004893"/>
+</test>
+<test id="s1-t3" name="Verify Invalid Command" line="93">
+<kw name="Run Serial Command">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.419183" level="INFO">${full_command} = garbagex</msg>
+<var>${full_command}</var>
+<arg>${command_base}${TERMINATOR}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.419183" level="INFO">${command_bytes} = garbagex</msg>
+<var>${command_bytes}</var>
+<arg>'${full_command}'.encode('ascii')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<kw name="Write Data" owner="SerialLibrary">
+<arg>${command_bytes}</arg>
+<doc>Writes data into the port.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:03.419183" level="INFO">Sent Command: garbagex</msg>
+<arg>Sent Command: ${full_command}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:04.419901" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="1.000718"/>
+</kw>
+<kw name="Read All Data" owner="SerialLibrary">
+<msg time="2025-10-19T15:09:04.419901" level="INFO">${response_bytes} = 49 6E 76 61 6C 69 64 5F 49 6E 70 75 74 0A</msg>
+<var>${response_bytes}</var>
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<kw name="Decode Serial Response">
+<kw name="Replace String" owner="String">
+<msg time="2025-10-19T15:09:04.419901" level="INFO">${hex_string_clean} = 496E76616C69645F496E7075740A</msg>
+<var>${hex_string_clean}</var>
+<arg>${response_bytes}</arg>
+<arg>${SPACE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:04.419901" level="INFO">${decoded_response} = Invalid_Input</msg>
+<var>${decoded_response}</var>
+<arg>bytes.fromhex('${hex_string_clean}').decode('ascii').strip()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${decoded_response}</value>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-19T15:09:04.419901" level="INFO">${decoded_response} = Invalid_Input</msg>
+<var>${decoded_response}</var>
+<arg>${response_bytes}</arg>
+<doc>Decodes the raw hex string response from the library into a readable string.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:04.419901" level="INFO">Received Response: Invalid_Input</msg>
+<arg>Received Response: ${decoded_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${decoded_response}</arg>
+<arg>${expected_response}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.000000"/>
+</kw>
+<arg>garbage</arg>
+<arg>Invalid_Input</arg>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="1.000718"/>
+</kw>
+<doc>Sends an invalid command (ending in 'x') and expects 'Invalid_Input' response.</doc>
+<status status="PASS" start="2025-10-19T15:09:03.419183" elapsed="1.000718"/>
+</test>
+<test id="s1-t4" name="Verify Button Pressed Status (MANUAL)" line="97">
+<kw name="Read Button Status Manually">
+<kw name="Read All Data" owner="SerialLibrary">
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="0.010043"/>
+</kw>
+<kw name="Pause Execution" owner="Dialogs">
+<arg>*** MANUAL STEP REQUIRED ***\nPlease ${action} the button now and press Enter to continue.</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.429944" elapsed="3.146248"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:08.578283" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:09:07.577511" elapsed="1.000772"/>
+</kw>
+<kw name="Read All Data" owner="SerialLibrary">
+<msg time="2025-10-19T15:09:08.578283" level="INFO">${response_bytes} = 62 75 74 74 6F 6E 5F 70 72 65 73 73 65 64 0A</msg>
+<var>${response_bytes}</var>
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.578283" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${response_bytes}' == ''</arg>
+<arg>Fail</arg>
+<arg>No button status change detected after manual action.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.578283" elapsed="0.000000"/>
+</kw>
+<kw name="Decode Serial Response">
+<kw name="Replace String" owner="String">
+<msg time="2025-10-19T15:09:08.580845" level="INFO">${hex_string_clean} = 627574746F6E5F707265737365640A</msg>
+<var>${hex_string_clean}</var>
+<arg>${response_bytes}</arg>
+<arg>${SPACE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:08.580845" level="INFO">${decoded_response} = button_pressed</msg>
+<var>${decoded_response}</var>
+<arg>bytes.fromhex('${hex_string_clean}').decode('ascii').strip()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${decoded_response}</value>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-19T15:09:08.580845" level="INFO">${decoded_response} = button_pressed</msg>
+<var>${decoded_response}</var>
+<arg>${response_bytes}</arg>
+<doc>Decodes the raw hex string response from the library into a readable string.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:08.580845" level="INFO">Received Button Status: button_pressed</msg>
+<arg>Received Button Status: ${decoded_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${decoded_response}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<arg>**PRESS** the button and hold it</arg>
+<arg>button_pressed</arg>
+<doc>Reads the spontaneous output from the button polling loop, requiring user intervention.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="4.160944"/>
+</kw>
+<doc>Requires pressing the physical button to trigger 'button_pressed'.</doc>
+<status status="PASS" start="2025-10-19T15:09:04.419901" elapsed="4.160944"/>
+</test>
+<test id="s1-t5" name="Verify Button Released Status (MANUAL)" line="101">
+<kw name="Read Button Status Manually">
+<kw name="Read All Data" owner="SerialLibrary">
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="0.000000"/>
+</kw>
+<kw name="Pause Execution" owner="Dialogs">
+<arg>*** MANUAL STEP REQUIRED ***\nPlease ${action} the button now and press Enter to continue.</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="1.564211"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-10-19T15:09:11.146033" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-10-19T15:09:10.145345" elapsed="1.000688"/>
+</kw>
+<kw name="Read All Data" owner="SerialLibrary">
+<msg time="2025-10-19T15:09:11.146033" level="INFO">${response_bytes} = 62 75 74 74 6F 6E 5F 72 65 6C 65 61 73 65 64 0A</msg>
+<var>${response_bytes}</var>
+<doc>Read all available data from the port's incoming buffer.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${response_bytes}' == ''</arg>
+<arg>Fail</arg>
+<arg>No button status change detected after manual action.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Decode Serial Response">
+<kw name="Replace String" owner="String">
+<msg time="2025-10-19T15:09:11.146033" level="INFO">${hex_string_clean} = 627574746F6E5F72656C65617365640A</msg>
+<var>${hex_string_clean}</var>
+<arg>${response_bytes}</arg>
+<arg>${SPACE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-10-19T15:09:11.146033" level="INFO">${decoded_response} = button_released</msg>
+<var>${decoded_response}</var>
+<arg>bytes.fromhex('${hex_string_clean}').decode('ascii').strip()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${decoded_response}</value>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-19T15:09:11.146033" level="INFO">${decoded_response} = button_released</msg>
+<var>${decoded_response}</var>
+<arg>${response_bytes}</arg>
+<doc>Decodes the raw hex string response from the library into a readable string.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-19T15:09:11.146033" level="INFO">Received Button Status: button_released</msg>
+<arg>Received Button Status: ${decoded_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${decoded_response}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<arg>**RELEASE** the button</arg>
+<arg>button_released</arg>
+<doc>Reads the spontaneous output from the button polling loop, requiring user intervention.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="2.565188"/>
+</kw>
+<doc>Requires releasing the physical button to trigger 'button_released'.</doc>
+<status status="PASS" start="2025-10-19T15:09:08.580845" elapsed="2.565188"/>
+</test>
+<kw name="Cleanup Port" type="TEARDOWN">
+<kw name="Close Port" owner="SerialLibrary">
+<doc>Closes specified port.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Remove Port">
+<msg time="2025-10-19T15:09:11.146033" level="FAIL">No keyword with name 'Remove Port' found.</msg>
+<arg>${PORT}</arg>
+<status status="FAIL" start="2025-10-19T15:09:11.146033" elapsed="0.015291">No keyword with name 'Remove Port' found.</status>
+</kw>
+<arg>Remove Port</arg>
+<arg>${PORT}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.015318"/>
+</kw>
+<doc>Closes the connection and attempts to remove the port configuration safely.</doc>
+<status status="PASS" start="2025-10-19T15:09:11.146033" elapsed="0.015318"/>
+</kw>
+<status status="PASS" start="2025-10-19T15:08:58.287974" elapsed="12.873377"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="5" fail="0" skip="0">Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-10-19T15:08:58.274616" level="WARN">Error in file 'D:\Coventry University\Year 2\1st semester\Embedded Systems\CW1\Test\test.robot' on line 23: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+</errors>
+</robot>

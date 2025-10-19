@@ -1,0 +1,8 @@
+Part,Description,Quantity,Price (EGP),Total Price (EGP),Datasheet
+Arduino Uno,Arduino Uno Rev3,1,350,435,https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf
+LED,"Red LED, 5mm",1,5,,
+Resistor,"220 Ohm, 0.25W",2,10,,
+Push Button,responds to pysical press and release,1,5,,
+Resistors,Male-to-Male,Several,10,,
+Arduino Cable,Connecting pc with arduino,1,20,,
+bread board (big),carries electronics connections,1,35,,
