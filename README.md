@@ -12,19 +12,19 @@ First coursework in embedded systems module in year 2 Electrical Engineering Cov
 ## 3. Test Cases
 
 Test Cases are developed in **[Robot Framework](https://robotframework.org/)** Test steps
-[robot_tests](Data-Acquisition-Over-Network-Project/Test/test.robot)
+[robot_tests](/Test/test.robot)
 ## 4. Bill of Materials (BOM)
 
 **BOM**
-[bom_file](Data-Acquisition-Over-Network-Project/BOM/bom.csv)
+[bom_file](/BOM/bom.csv)
 
 **Optimized BOM**
-[optimized_bom_file](Data-Acquisition-Over-Network-Project/BOM/optimized_bom.csv)
+[optimized_bom_file](/BOM/optimized_bom.csv)
 
 ## 5. Video Demonstration
 
-[recorded_video](Data-Acquisition-Over-Network-Project/Video/)
+[recorded_videos](/Video/)
 
 
 ## 6. Design
-[design_document](Data-Acquisition-Over-Network-Project/Project/ProjectFinalDesign.md)
+[design_document](/Project/ProjectFinalDesign.md)
