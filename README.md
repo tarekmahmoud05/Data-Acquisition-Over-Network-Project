@@ -7,7 +7,7 @@ First coursework in embedded systems module in year 2 Electrical Engineering Cov
 [submission_repo](https://github.com/tarekmahmoud05/Data-Acquisition-Over-Network-Project)
 
 **Local Root Directory**
-[link_to_local_root_directory](Data-Acquisition-Over-Network-Project/final_app/)
+[link_to_local_root_directory](/final_app/)
 
 ## 3. Test Cases
 
